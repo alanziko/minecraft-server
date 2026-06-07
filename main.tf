@@ -9,12 +9,13 @@ resource "hcloud_server" "primary_node" {
     ipv4         = hcloud_primary_ip.primary_ip.id
     ipv6_enabled = false
   }
+
+  firewall_ids = [hcloud_firewall.primary_firewall.id]
 }
 
 resource "hcloud_primary_ip" "primary_ip" {
   name          = "primary_ip"
   location      = "fsn1"
   type          = "ipv4"
-  assignee_type = "server"
   auto_delete   = false
 }

@@ -11,6 +11,7 @@ resource "hcloud_server" "primary_node" {
   }
 
   firewall_ids = [hcloud_firewall.primary_firewall.id]
+  ssh_keys = [for k in hcloud_ssh_key.primary_keys : k.id]
 }
 
 resource "hcloud_primary_ip" "primary_ip" {

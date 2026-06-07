@@ -2,7 +2,7 @@ resource "hcloud_storage_box" "primary_backup" {
   name             = "primary_backup"
   storage_box_type = var.storage_type
   location         = var.location
-  password         = "abc"
+  password         = var.storage_password
 
   access_settings = {
     reachable_externally = true

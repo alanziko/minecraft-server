@@ -18,3 +18,8 @@ variable "server_type" {
 variable "storage_type" {
   default = "bx11"
 }
+
+variable "storage_password" {
+  type      = string
+  sensitive = true
+}

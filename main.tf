@@ -1,5 +1,5 @@
 resource "hcloud_server" "primary_node" {
-  name        = "primary_node"
+  name        = "primary"
   image       = "ubuntu-24.04"
   server_type = var.server_type
   location    = var.location

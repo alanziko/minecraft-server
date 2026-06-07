@@ -1,5 +1,2 @@
 [server]
-${server-ip}
-
-[storage]
-${storage-hostname}
+${server-ip} ansible_user=root

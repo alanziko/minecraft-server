@@ -14,3 +14,7 @@ variable "location" {
 variable "server_type" {
   default = "ccx13"
 }
+
+variable "storage_type" {
+  default = "bx11"
+}

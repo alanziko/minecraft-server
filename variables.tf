@@ -7,7 +7,7 @@ variable "ssh_keys_path" {
 }
 
 variable "location" {
-  type = string
+  type    = string
   default = "fsn1"
 }
 

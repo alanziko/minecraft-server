@@ -1,8 +1,8 @@
 resource "hcloud_server" "primary_node" {
   name        = "primary_node"
   image       = "ubuntu-24.04"
-  server_type = "cpx11"
-  location    = "fsn1"
+  server_type = var.server_type
+  location    = var.location
 
   public_net {
     ipv4_enabled = true
@@ -15,7 +15,7 @@ resource "hcloud_server" "primary_node" {
 
 resource "hcloud_primary_ip" "primary_ip" {
   name          = "primary_ip"
-  location      = "fsn1"
+  location      = var.location
   type          = "ipv4"
   auto_delete   = false
 }

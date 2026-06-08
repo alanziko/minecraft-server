@@ -47,4 +47,4 @@ terraform.rc
 .venv
 
 # Ansible inventory
-./ansible/inventory.ini
+ansible/inventory.ini

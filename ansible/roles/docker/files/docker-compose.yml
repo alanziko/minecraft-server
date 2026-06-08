@@ -1,44 +1,38 @@
 services:
-  mc:
+  minecraft:
     image: itzg/minecraft-server:latest
-    container_name: minecraft
     restart: unless-stopped
-    tty: true
-    stdin_open: true
     ports:
-      - "25565:25565"
+      - 25565:25565
     environment:
-      EULA: "TRUE"
-      VERSION: "1.12.2"
-      MEMORY: "6144M"
-      ONLINE_MODE: "false"
-      USE_AIKAR_FLAGS: "true"
+      EULA: TRUE
+      VERSION: 1.12.2
+      MEMORY: 6144M
+      ONLINE_MODE: false
+      USE_AIKAR_FLAGS: true
     volumes:
-      - "/opt/minecraft/data:/data"
+      - /opt/minecraft/data:/data
 
   prometheus:
     image: prom/prometheus:latest
-    container_name: prometheus
     restart: unless-stopped
     volumes:
       - /opt/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - /opt/monitoring/prometheus/data:/prometheus
     ports:
-      - "9090:9090"
+      - 9090:9090
 
   grafana:
     image: grafana/grafana
-    container_name: grafana
     restart: unless-stopped
     volumes:
       # - /opt/grafana/grafana.ini:/etc/grafana/grafana.ini
       - /opt/monitoring/grafana/data:/var/lib/grafana
     ports:
-      - "3000:3000"
+      - 3000:3000
 
   node-exporter:
     image: prom/node-exporter
-    container_name: node-exporter
     restart: unless-stopped
     command:
       - '--path.rootfs=/host'

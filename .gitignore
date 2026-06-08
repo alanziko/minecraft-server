@@ -48,3 +48,6 @@ terraform.rc
 
 # Ansible inventory
 ansible/inventory.ini
+
+# Pub keys
+keys/*.pub

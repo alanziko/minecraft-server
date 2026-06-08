@@ -11,7 +11,7 @@ resource "hcloud_firewall" "primary_firewall" {
     ]
   }
 
-  # Minecraft
+  # Minecraft TCP
   rule {
     direction = "in"
     protocol  = "tcp"
@@ -22,6 +22,7 @@ resource "hcloud_firewall" "primary_firewall" {
     ]
   }
 
+  # Minecraft UDP
   rule {
     direction = "in"
     protocol  = "udp"
@@ -46,8 +47,8 @@ resource "hcloud_firewall" "primary_firewall" {
   # Grafana
   rule {
     direction = "in"
-    protocol = "tcp"
-    port = "3000"
+    protocol  = "tcp"
+    port      = "3000"
     source_ips = [
       "0.0.0.0/0",
       "::/0"

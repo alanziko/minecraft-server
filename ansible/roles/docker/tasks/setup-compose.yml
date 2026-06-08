@@ -19,8 +19,8 @@
 
 - name: Copy docker-compose file
   copy:
-    src: compose.yml
-    dest: /opt/compose.yml
+    src: docker-compose.yml
+    dest: /opt/docker-compose.yml
     mode: "0644"
 
 - name: Copy Prometheus config
@@ -35,3 +35,4 @@
   community.docker.docker_compose_v2:
     project_src: /opt
     state: present
+    recreate: always

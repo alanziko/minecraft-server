@@ -2,7 +2,7 @@ resource "hcloud_storage_box" "primary_backup" {
   name             = "primary_backup"
   storage_box_type = var.storage_type
   location         = var.location
-  password         = var.storage_password
+  password         = random_password.storage_password.result
 
   access_settings = {
     reachable_externally = true
@@ -19,4 +19,16 @@ resource "hcloud_storage_box" "primary_backup" {
 
     prevent_destroy = true
   }
+}
+
+resource "random_password" "storage_password" {
+  length = 16
+
+  special = true
+  override_special = "!#$%&_"
+
+  min_lower = 1
+  min_upper = 1
+  min_special = 1
+  min_numeric = 1
 }

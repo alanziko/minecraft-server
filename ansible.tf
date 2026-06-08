@@ -1,12 +1,10 @@
 locals {
-  server-ip = hcloud_server.primary_node.ipv4_address
-
-  inventory = templatefile("${path.module}/ansible/inventory.tpl", {
-    server-ip = local.server-ip
-  })
+  server-ip = hcloud_server.minecraft.ipv4_address
 }
 
 resource "local_file" "inventory" {
-  content  = local.inventory
+  content  = templatefile("ansible/inventory.tpl", {
+    server-ip = local.server-ip
+  })
   filename = "${path.module}/ansible/inventory.ini"
 }

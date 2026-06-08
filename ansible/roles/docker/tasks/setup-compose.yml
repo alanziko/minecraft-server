@@ -1,0 +1,37 @@
+- name: Create monitoring base directory
+  file:
+    path: /opt/monitoring
+    state: directory
+    mode: "0755"
+
+- name: Create subdirectories
+  file:
+    path: /opt/monitoring/{{ item.path }}
+    state: directory
+    mode: "0755"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+  loop:
+    - { path: "prometheus", owner: "65534", group: "65534" }
+    - { path: "prometheus/data", owner: "65534", group: "65534" }
+    - { path: "grafana", owner: "472", group: "472" }
+    - { path: "grafana/data", owner: "472", group: "472" }
+
+- name: Copy docker-compose file
+  copy:
+    src: compose.yml
+    dest: /opt/compose.yml
+    mode: "0644"
+
+- name: Copy Prometheus config
+  copy:
+    src: prometheus.yml
+    dest: /opt/monitoring/prometheus/prometheus.yml
+    mode: "0644"
+    owner: "65534"
+    group: "65534"
+
+- name: Deploy stack
+  community.docker.docker_compose_v2:
+    project_src: /opt
+    state: present

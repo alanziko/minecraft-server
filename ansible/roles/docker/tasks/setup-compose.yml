@@ -17,6 +17,12 @@
     - { path: "grafana", owner: "472", group: "472" }
     - { path: "grafana/data", owner: "472", group: "472" }
 
+- name: Create secrets direcotry
+  file:
+    path: /opt/secrets
+    state: directory
+    mode: "0755"
+
 - name: Copy docker-compose file
   copy:
     src: docker-compose.yml
@@ -30,6 +36,14 @@
     mode: "0644"
     owner: "65534"
     group: "65534"
+
+- name: Copy Grafana secret
+  copy:
+    dest: /opt/secrets/grafana_password
+    content: "{{ grafana_password }}"
+    mode: "0400"
+    owner: "472"
+    group: "472"
 
 - name: Deploy stack
   community.docker.docker_compose_v2:

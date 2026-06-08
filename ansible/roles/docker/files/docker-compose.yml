@@ -26,10 +26,13 @@ services:
     image: grafana/grafana
     restart: unless-stopped
     volumes:
-      # - /opt/grafana/grafana.ini:/etc/grafana/grafana.ini
       - /opt/monitoring/grafana/data:/var/lib/grafana
     ports:
       - 3000:3000
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/grafana_password
+    secrets:
+      - grafana_password
 
   node-exporter:
     image: prom/node-exporter
@@ -41,3 +44,7 @@ services:
     pid: host
     volumes:
       - '/:/host:ro,rslave'
+
+secrets:
+  grafana_password:
+    file: /opt/secrets/grafana_password

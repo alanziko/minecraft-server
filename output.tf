@@ -9,6 +9,11 @@ output "storage_box_password" {
   description = "Password for accessing Storage Box"
 }
 
+output "storage_box_hostname" {
+   value = "${hcloud_storage_box.primary_backup.username}.your-storagebox.de"
+   description = "Hostname for Storage Box"
+}
+
 output "grafana_password" {
   value       = random_password.grafana_password.result
   sensitive   = true

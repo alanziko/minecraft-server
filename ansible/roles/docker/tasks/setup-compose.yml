@@ -45,6 +45,24 @@
     owner: "472"
     group: "472"
 
+- name: Copy Grafana provisioning
+  copy:
+    src: provisioning
+    dest: /opt/monitoring/grafana
+    mode: "0644"
+    directory_mode: "0755"
+    owner: "472"
+    group: "472"
+
+- name: Copy Grafana dashboards
+  copy:
+    src: dashboards
+    dest: /opt/monitoring/grafana
+    mode: "0644"
+    directory_mode: "0755"
+    owner: "472"
+    group: "472"
+
 - name: Deploy stack
   community.docker.docker_compose_v2:
     project_src: /opt

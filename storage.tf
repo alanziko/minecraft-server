@@ -7,7 +7,6 @@ resource "hcloud_storage_box" "primary_backup" {
   access_settings = {
     reachable_externally = true
     ssh_enabled          = true
-    zfs_enabled          = true
   }
 
   ssh_keys = [for k in hcloud_ssh_key.primary_keys : k.public_key]

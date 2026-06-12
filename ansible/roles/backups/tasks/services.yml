@@ -1,0 +1,25 @@
+  - name: Copy backup script
+    copy:
+      src: backup.sh
+      dest: /opt/backup.sh
+      mode: '0755'
+
+  - name: Copy backup service
+    copy:
+      src: backup.service
+      dest: /etc/systemd/system/backup.service
+      mode: '0644'
+    notify: Reload systemd
+
+  - name: Copy backup timer
+    copy:
+      src: backup.timer
+      dest: /etc/systemd/system/backup.timer
+      mode: '0644'
+    notify: Reload systemd
+
+  - name: Enable and start timer
+    systemd:
+      name: backup.timer
+      enabled: true
+      state: started

@@ -1,0 +1,8 @@
+- name: Exchange ssh keys with storage
+  import_tasks: sshkeys.yml
+
+- name: Setup restic
+  import_tasks: restic.yml
+
+- name: Setup services
+  import_tasks: services.yml

@@ -3,6 +3,11 @@ output "instance_ip_addr" {
   description = "IP Address of Minecraft server"
 }
 
+output "storage_box_user" {
+  value = hcloud_storage_box.primary_backup.username
+  description = "User for accessing Storage Box"
+}
+
 output "storage_box_password" {
   value       = random_password.storage_password.result
   sensitive   = true

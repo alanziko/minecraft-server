@@ -1,0 +1,6 @@
+[Unit]
+Description=Backup
+
+[Service]
+Type=oneshot
+ExecStart=/opt/backup.sh

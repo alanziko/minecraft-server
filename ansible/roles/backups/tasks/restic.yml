@@ -1,0 +1,25 @@
+- name: Install restic
+  apt:
+    name: restic
+    update_cache: yes
+
+- name: Copy storage box password
+  copy:
+    dest: /opt/storage_pass
+    content: "{{ storage_box_password }}"
+    mode: "0600"
+  
+# - name: Check whether restic repository exists
+#   command: restic cat config
+#   environment:
+#     RESTIC_REPOSITORY: "sftp:{{ storage_box_user }}@{{ storage_box_hostname }}:23/restic"
+#     RESTIC_PASSWORD: "{{ storage_box_password }}"
+#   register: restic_check
+#   failed_when: false
+#   changed_when: false
+
+- name: Init restic repository
+  environment:
+    RESTIC_REPOSITORY: "sftp:{{ storage_box_user }}@{{ storage_box_hostname }}:23/restic"
+    RESTIC_PASSWORD: "{{ storage_box_password }}"
+  command: restic init

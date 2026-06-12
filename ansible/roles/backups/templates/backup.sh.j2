@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+export RESTIC_PASSWORD_FILE=/opt/storage_pass
+export RESTIC_REPOSITORY="sftp://{{ storage_box_user }}@{{ storage_box_hostname }}:23//home/restic"
+
+cd /opt
+
+docker compose stop minecraft
+
+cd /opt/minecraft/data
+restic backup data
+
+docker compose up -d
+
+restic forget \
+  --keep-daily 1 \
+  --keep-weekly 7 \
+  --keep-monthly 14 \
+  --prune

@@ -1,6 +1,6 @@
   - name: Copy backup script
-    copy:
-      src: backup.sh
+    template:
+      src: backup.sh.j2
       dest: /opt/backup.sh
       mode: '0755'
 

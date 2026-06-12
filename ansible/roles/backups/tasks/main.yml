@@ -1,5 +1,5 @@
 - name: Exchange ssh keys with storage
-  import_tasks: sshkeys.yml
+  import_tasks: ssh_keys.yml
 
 - name: Setup restic
   import_tasks: restic.yml
